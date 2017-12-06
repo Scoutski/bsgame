@@ -1,0 +1,52 @@
+{
+  "id": "http://bsgame.io/schemas/user.json",
+  "type": "object",
+  "name": "user",
+  "pluralName": "users",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+    },
+    "email": {
+      "description": "The user's email address.",
+      "type": "string",
+      "example": "hello@me.com"
+    },
+    "password": {
+      "description": "The user's secure password to log in.",
+      "type": "string"
+    },
+    "realName": {
+      "description": "The user's name in real life.",
+      "type": "string"
+    },
+    "displayName": {
+      "description": "The user's chosen name to be identified on bsgame.io.",
+      "type": "string"
+    },
+    "isAdmin": {
+      "description": "Flag to indicate whether or not the user is an administrator.",
+      "type": "boolean"
+    },
+    "active": {
+      "description": "Flag to indicate whether or not the user is active.",
+      "type": "boolean",
+      "default": true
+    },
+    "createdAt": {
+      "description": "The timestamp when the user was created.",
+      "type": "date"
+    },
+    "updatedAt": {
+      "description": "The timestamp when the user was last updated.",
+      "type": "date"
+    }
+  },
+  "required": [
+    "email",
+    "password",
+    "displayName"
+  ]
+}
