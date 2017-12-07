@@ -62,6 +62,3 @@ module.exports = database.define('users', {
       }
     }
   });
-
-  return User;
-}

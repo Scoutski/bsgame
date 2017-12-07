@@ -5,16 +5,19 @@
   "main": "index.js",
   "repository": "https://github.com/Scoutski/bsgame",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js DATABASE_URI=postgres://bsgame@postgresql/bsgame_development",
+    "test": "env DATABASE_URI=postgres://bsgame@postgresql/bsgame_test ava --verbose"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.3",
     "express": "^4.16.2",
+    "pg": "^7.4.0",
     "sequelize": "^4.26.0"
   },
   "devDependencies": {
+    "ava": "^0.24.0",
     "eslint": "^4.12.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
