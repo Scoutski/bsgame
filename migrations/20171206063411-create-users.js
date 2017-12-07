@@ -13,15 +13,19 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      realName: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      displayName: {
+      password: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      isAdmin: {
+      real_name: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      display_name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      is_admin: {
         type: Sequelize.BOOLEAN,
         allowNull: false
       },
