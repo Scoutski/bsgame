@@ -1,0 +1,13 @@
+version: '2'
+services:
+  bsgame:
+    build: .
+    environment:
+      PORT: 1337
+      DATABASE_URI: postgres://bsgame@postgres/bsgame_development
+    ports:
+      - 1337
+  postgres:
+    image: postgres:alpine
+    volumes:
+      - ./config/database/initialize_db.sql:/docker-entrypoint-initdb.d/init.sql
