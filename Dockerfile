@@ -11,4 +11,5 @@ RUN NODE_ENV=null npm install
 
 ADD . /app
 
+EXPOSE 1337
 CMD ["npm", "start"]
