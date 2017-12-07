@@ -27,11 +27,13 @@ module.exports = {
       },
       is_admin: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: false
       },
       active: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: true
       },
       created_at: {
         type: Sequelize.DATE,
@@ -42,18 +44,14 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-      }
+      },
+      deleted_at: {
+        type: Sequelize.DATE,
+        allowNull: true
+      },
     }).then(() =>
       queryInterface.addIndex('users', ['email'], { indicesType: 'UNIQUE' }));
   },
-
-  down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.dropTable('users');
-    */
-  }
+  down: (queryInterface, Sequelize) =>
+    queryInterface.dropTable('users'),
 };

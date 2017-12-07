@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const Sequelize = require('sequelize');
 const database = require('../../config/database');
 
-module.exports = database.define('users', {
+const User = database.define('users', {
   id: {
     type: Sequelize.UUID,
     primaryKey: true,
@@ -25,16 +25,19 @@ module.exports = database.define('users', {
   displayName: {
     type: Sequelize.STRING,
     allowNull: false,
-    field: 'display_name'
+    field: 'display_name',
+    defaultValue: false
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
-    field: 'is_admin'
+    field: 'is_admin',
+    defaultValue: false
   },
   active: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
+    defaultValue: true
   },
   createdAt: {
     type: Sequelize.DATE,
@@ -47,18 +50,19 @@ module.exports = database.define('users', {
     allowNull: false,
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
     field: 'updated_at'
-  }
+  },
+  deletedAt: {
+    type: Sequelize.DATE,
+    field: 'deleted_at'
+  },
 }, {
-    paranoid: true,
-    timestamps: true,
-    tableName: 'users',
-    freezeTableName: true,
-    instanceMethods: {
-      generateHash(password) {
-        return bcrypt.hash(password, bcrypt.genSaltSync(8));
-      },
-      validatePassword(password) {
-        return bcrypt.compare(password, this.password);
-      }
-    }
-  });
+  paranoid: true,
+  timestamps: true,
+  tableName: 'users',
+});
+
+User.prototype.validatePassword = function (password) {
+  return bcrypt.compare(password, this.password);
+};
+
+module.exports = User;

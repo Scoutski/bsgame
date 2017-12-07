@@ -5,8 +5,11 @@
   "main": "index.js",
   "repository": "https://github.com/Scoutski/bsgame",
   "scripts": {
-    "start": "node index.js DATABASE_URI=postgres://bsgame@postgresql/bsgame_development",
-    "test": "env DATABASE_URI=postgres://bsgame@postgresql/bsgame_test ava --verbose"
+    "start": "node index.js DATABASE_URI=postgres://bsgame:@postgresql/bsgame_development",
+    "test": "npm run pretest && npm run runtest; npm run posttest",
+    "pretest": "sequelize db:migrate --url postgres://bsgame:@localhost:5432/bsgame_testing",
+    "runtest": "env DATABASE_URI=postgres://bsgame:@localhost:5432/bsgame_testing ava --verbose",
+    "posttest": "sequelize db:migrate:undo --url postgres://bsgame:@localhost:5432/bsgame_testing"
   },
   "author": "",
   "license": "ISC",
@@ -14,7 +17,8 @@
     "bcrypt": "^1.0.3",
     "express": "^4.16.2",
     "pg": "^7.4.0",
-    "sequelize": "^4.26.0"
+    "sequelize": "^4.26.0",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "ava": "^0.24.0",
