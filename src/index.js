@@ -9,8 +9,9 @@ app.use(express.static('public'));
 
 const { PORT = 1337 } = process.env;
 
-app.listen(PORT);
-console.log('App is now listening on port', PORT);
+app.listen(PORT, () => {
+  console.log('App is now listening on port', PORT); // eslint-disable-line
+});
 
 app.get('/health', (req, res) => {
   res.send('OK');
