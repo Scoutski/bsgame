@@ -2,11 +2,13 @@ version: '2'
 services:
   bsgame:
     build: .
+    volumes:
+      - .:/app
     environment:
       PORT: 1337
       DATABASE_URI: postgres://bsgame@postgres/bsgame_development
     ports:
-      - 1337
+      - "1337:1337"
   postgres:
     image: postgres:alpine
     volumes:
